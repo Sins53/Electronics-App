@@ -47,7 +47,6 @@ const ListCard = (props) => {
         </div>
         <div className='text-end mt-2'><Adder 
         stock = {stock}
-        //order = {order}
         setOrder = {setOrder}
         />
         </div>

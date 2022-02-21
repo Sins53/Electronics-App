@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Validation from "./Error";
@@ -7,6 +7,7 @@ import {GrSubtractCircle , GrAddCircle} from 'react-icons/gr'
 const initialValues = {
   order : 1,
 }
+var i = 1
 
 const Adder = (props) => {
   const [formData, setFormData] = useState(initialValues)
@@ -15,10 +16,18 @@ const Adder = (props) => {
   const validationSchema = Yup.object({
     phone: Yup.string().min(1, 'Lowest 1').max({stock}, 'Must be below 10').required(),                     
   });
-  if(cartOrder>1){
+
+  useEffect(() => {
+    if(cartOrder>1){
+    var a = {
+      order : cartOrder
+    }
+    setFormData(a)
     console.log(cartOrder)
-  }
-  
+    }
+    
+  }, [cartOrder])
+
 
   const OrderSub = () => {
     setFormData({order: formData.order - 1})
@@ -39,7 +48,6 @@ const Adder = (props) => {
       validationSchema,
     });
 
-    
 
   return (
     <>
@@ -47,7 +55,7 @@ const Adder = (props) => {
           <button onClick={OrderSub}>
           <GrSubtractCircle />
           </button>
-        <form className='col-auto AdderCart-form' onSubmit={(e) => e.preventDefault() }>
+        <form className='col-auto AdderCart-form' onSubmit={(e) => e.preventDefault() }>   
       <input 
         type="number" 
         name='order'

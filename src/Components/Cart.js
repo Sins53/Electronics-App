@@ -3,9 +3,8 @@ import Adder from './Adder'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 
-var qwe = 0;
 const Cart = (props) => {
-  const [amount, setAmount] = useState(0)
+  //const [amount, setAmount] = useState(0)
   const [totalProducts, setTotalProducts] = useState(0)
   const {cart, setShowCart} = props
 
@@ -29,8 +28,6 @@ const Cart = (props) => {
       </div>
       
         {cart.map((item) => {
-          {qwe = qwe + item.order }
-          {console.log(qwe)}
           return (
             <>
             <div className="row mt-1">
@@ -39,13 +36,13 @@ const Cart = (props) => {
         </div>
         <div className="col-4 ctext ">
           <h2>{item.name}</h2>
-          <h2>{item.toRs}</h2>
+          <h2>{item.r*item.order}</h2>
         </div>
         <div className="col-3 ml-auto cstock text-end">
           <h5>{ 'Stock remaining: ' + item.stock}</h5>
-          <h5><Adder
+          <Adder
           cartOrder = {item.order}
-          /> </h5>
+          />
           <h5>Ordered {item.order}</h5>
         </div>
         </div>
@@ -57,8 +54,6 @@ const Cart = (props) => {
         <button>Checkout</button>
       </div>
     </div> 
-    {console.log(qwe)}
-    {setTotalProducts(qwe)}
     </>
   )
 }
