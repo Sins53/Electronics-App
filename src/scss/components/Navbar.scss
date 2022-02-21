@@ -1,0 +1,26 @@
+.Navbar {
+  //background-color: rgb(5, 5, 70);
+  background-image: linear-gradient(to right, rgb(0, 0, 46), rgb(10, 7, 235));
+  &-title {
+    display: inline;
+    margin-left: 2rem;
+    color: red;
+  }
+  &-text {
+    display: inline;
+    margin-right: 2rem;
+    
+  }
+  .img-responsive {
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 250px;
+    border-radius: 50%;
+}
+}
+
+.Cart-layout{
+  background-color: yellow;
+  max-width: 50%;
+}

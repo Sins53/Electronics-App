@@ -1,0 +1,14 @@
+.cimg{
+  background-color: blue;
+  &-im{
+    height: 4em;
+    width: 4em;
+    margin: 0.5rem 0;
+  }
+}
+.ctext{
+  background-color: red;
+}
+.cstock{
+  background-color: green;
+}

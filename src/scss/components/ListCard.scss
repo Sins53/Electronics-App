@@ -1,0 +1,31 @@
+.ListCard {
+  margin-top: 1.5rem;
+  //background-color: green;
+  //border: 2px solid red;
+
+  &-items {
+    margin: 1rem 0.5rem;
+  }
+  &-image{
+    border: 2px solid black;
+    height: auto;
+    width: auto;
+    height: 15rem;
+    width: 100%;
+  }
+
+  &-danger{
+    color:red
+  }
+  &-ok{
+    color: orange;
+  }
+  &-full {
+    color:green;
+  }
+  &-btn {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(33, 1, 75), rgba(255,0,0,0));
+    color: white;
+  }
+}
