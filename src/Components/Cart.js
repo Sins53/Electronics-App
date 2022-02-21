@@ -58,7 +58,7 @@ const Cart = (props) => {
       </div>
     </div> 
     {console.log(qwe)}
-    
+    {setTotalProducts(qwe)}
     </>
   )
 }
