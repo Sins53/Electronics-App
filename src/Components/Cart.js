@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Adder from './Adder'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
-
+var qwe = 0;
+var total = 0;
 const Cart = (props) => {
   //const [amount, setAmount] = useState(0)
-  const [totalProducts, setTotalProducts] = useState(0)
+  //const [totalProducts, setTotalProducts] = useState(0)
   const {cart, setShowCart} = props
 
-  
+  var imgUrl = 'https://electronic-ecommerce.herokuapp.com/'
+
+  useEffect(() => {
+    qwe = 0;
+    total = 0;
+    console.log('will mount')
+    return () => {
+      qwe = 0;
+      total = 0;
+      console.log('will dismount')
+    }
+  }, [])
+
   function closeCart(){
     setShowCart(false)
   }
-  var imgUrl = 'https://electronic-ecommerce.herokuapp.com/'
+  
+
+  const productCount = (order) => {
+    qwe = qwe + order;
+    console.log(qwe)
+    //setTotalProducts(qwe)
+  }
+  const totalAmount = (price,order) => {
+    total = (price*order) + total
+  }
 
   return (
     <>
@@ -24,21 +46,23 @@ const Cart = (props) => {
         </div>
         
         
-        <h1>Total items : {totalProducts} </h1>
+        <h1>Total items : {qwe} </h1>
       </div>
       
         {cart.map((item) => {
+          {productCount(item.order)}
+          {totalAmount(item.r,item.order)}
           return (
             <>
             <div className="row mt-1">
             <div className="col-auto cimg">
-        <img className='cimg-im' src={imgUrl + item.image} alt="" />
+        <img className='Cart-img' src={imgUrl + item.image} alt="" />
         </div>
-        <div className="col-4 ctext ">
+        <div className="col-4">
           <h2>{item.name}</h2>
-          <h2>{item.r*item.order}</h2>
+          <h2>{'Rs. ' + item.r*item.order}</h2>
         </div>
-        <div className="col-3 ml-auto cstock text-end">
+        <div className="col-3 ml-auto text-end">
           <h5>{ 'Stock remaining: ' + item.stock}</h5>
           <Adder
           cartOrder = {item.order}
@@ -50,7 +74,7 @@ const Cart = (props) => {
           )
         })}
       <div className='text-end mt-5'>
-        <h5>Total Amount </h5>
+        <h5>Total Amount : {total} </h5>
         <button>Checkout</button>
       </div>
     </div> 

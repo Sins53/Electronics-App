@@ -7,24 +7,22 @@ import {GrSubtractCircle , GrAddCircle} from 'react-icons/gr'
 const initialValues = {
   order : 1,
 }
-var i = 1
 
 const Adder = (props) => {
   const [formData, setFormData] = useState(initialValues)
   const {stock , setOrder , cartOrder} = props;
 
   const validationSchema = Yup.object({
-    phone: Yup.string().min(1, 'Lowest 1').max({stock}, 'Must be below 10').required(),                     
+    phone: Yup.number().min(1, 'Lowest 1').max({stock}, 'Must be below 10').required(),                     
   });
 
   useEffect(() => {
-    if(cartOrder>1){
+    if(cartOrder > 1) {
     var a = {
       order : cartOrder
     }
-    setFormData(a)
-    console.log(cartOrder)
-    }
+    setFormData(a) 
+    }  
     
   }, [cartOrder])
 

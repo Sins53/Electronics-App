@@ -4,7 +4,7 @@ import profilePic from '../assets/images/profile-pic.jpg';
 import Cart from '../Components/Cart'
 
 const Navbar = (props) => {
-  const {cart} = props
+  const {cart, len} = props
   const [showCart, setShowCart] = useState(false);
 
   const displayCart = () => {
@@ -22,11 +22,12 @@ const Navbar = (props) => {
           <img className='img-responsive ms-4' src={profilePic} alt="" />
           <h1 className='Navbar-title'>Shopmandu</h1>
         </div>
-        <div className="col-3">
+        <div className="col-4 text-end me-4">
           <h2 className='Navbar-text'>Home</h2>
-          <button className='me-4' onClick={displayCart}>
+          <button className='me-4 Navbar-btn' onClick={displayCart}>
             <BsCart3 />
           </button>
+          <h2 className='Navbar-count'> {len} </h2>
           <img className='img-responsive' src={profilePic} alt="" />
         </div>
       </div>
