@@ -7,13 +7,14 @@ import {GrSubtractCircle , GrAddCircle} from 'react-icons/gr'
 const initialValues = {
   order : 1,
 }
+var check = 0;
 
 const Adder = (props) => {
   const [formData, setFormData] = useState(initialValues)
-  const {stock , setOrder , cartOrder} = props;
+  const {stock , setOrder , cartOrder, cart, id, setCart} = props;
 
   const validationSchema = Yup.object({
-    phone: Yup.number().min(1, 'Lowest 1').max({stock}, 'Must be below 10').required(),                     
+    phone: Yup.number().min(1, 'Lowest 1').max({stock}, 'Select Less').required(),                     
   });
 
   useEffect(() => {
@@ -21,24 +22,50 @@ const Adder = (props) => {
     var a = {
       order : cartOrder
     }
+    check = 1;
     setFormData(a) 
     } else {
       setFormData(initialValues)
-    }
-    
+      check = 0;
+    } 
   }, [cartOrder])
 
 
   const OrderSub = () => {
     setFormData({order: formData.order - 1})
-    console.log(formData)
+    //console.log(formData)
     //console.log(stock)
-    setOrder(formData.order - 1)
+    if(check===0){
+      setOrder(formData.order - 1)
+    } else {
+      const newarr = cart.map((item) => {
+        if (item.id===id) {
+          console.log(item)
+          return {...item, order :  formData.order - 1}
+        
+        } else {
+          return item
+        }
+      })
+      setCart(newarr)
+    } 
   }
   const OrderAdd = () => {
     setFormData({order: formData.order + 1})
     console.log(formData)
-    setOrder(formData.order + 1)
+    if(check===0){
+      setOrder(formData.order + 1)
+    } else {
+      const newarr = cart.map((item) => {
+        if (item.id===id) {
+          console.log(item)
+          return {...item, order :  formData.order + 1}
+        } else {
+          return item
+        }
+      })
+      setCart(newarr)
+    } 
   }
 
   const { values, errors, handleChange} =

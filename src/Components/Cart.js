@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Adder from './Adder'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 var qwe = 0;
 var total = 0;
 const Cart = (props) => {
-  //const [amount, setAmount] = useState(0)
-  //const [totalProducts, setTotalProducts] = useState(0)
+  const [amount, setAmount] = useState(0)
+  const [totalProducts, setTotalProducts] = useState(0)
   const {cart,setCart, setShowCart} = props
 
   var imgUrl = 'https://electronic-ecommerce.herokuapp.com/'
@@ -22,6 +22,22 @@ const Cart = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    qwe = 0;
+    total = 0;
+    if(cart.length===0){
+      setAmount(0);
+      setTotalProducts(0);
+    }
+    cart.forEach((item) => {
+    productCount(item.order)
+    totalAmount(item.r,item.order)
+    }) 
+  }, [cart])
+  
+
+  
+
   function closeCart(){
     setShowCart(false)
   }
@@ -35,15 +51,16 @@ const Cart = (props) => {
     setCart(newArr)
   }
   
-
   const productCount = (order) => {
     qwe = qwe + order;
     console.log(qwe)
-    //setTotalProducts(qwe)
+    setTotalProducts(qwe)
   }
   const totalAmount = (price,order) => {
     total = (price*order) + total
+    setAmount(total)
   }
+  
 
   return (
     <>
@@ -55,13 +72,13 @@ const Cart = (props) => {
         </div>
         
         
-        <h1>Total items : {qwe} </h1>
+        <h1>Total items : {totalProducts} </h1>
       </div>
       
         {cart.map((item) => {
-          {cart.indexOf(item)===0 ? qwe = 0 : console.log('false')}
-          {productCount(item.order)}
-          {totalAmount(item.r,item.order)}
+          //{cart.indexOf(item)===0 ? qwe = 0 : console.log('false')}
+          //{productCount(item.order)}
+          //{totalAmount(item.r,item.order)}
           return (
             <>
             <div className="row mt-1">
@@ -79,6 +96,9 @@ const Cart = (props) => {
           <h5>{ 'Stock remaining: ' + item.stock}</h5>
           <Adder
           cartOrder = {item.order}
+          cart = {cart}
+          id = {item.id}
+          setCart = {setCart}
           />
           <h5>Ordered {item.order}</h5>
         </div>
@@ -87,7 +107,7 @@ const Cart = (props) => {
           )
         })}
       <div className='text-end mt-5'>
-        <h5>Total Amount : {total} </h5>
+        <h5>Total Amount : {amount} </h5>
         <button>Checkout</button>
       </div>
     </div> 
