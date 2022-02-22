@@ -4,7 +4,7 @@ import profilePic from '../assets/images/profile-pic.jpg';
 import Cart from '../Components/Cart'
 
 const Navbar = (props) => {
-  const {cart, len} = props
+  const {cart, setCart} = props
   const [showCart, setShowCart] = useState(false);
 
   const displayCart = () => {
@@ -27,7 +27,7 @@ const Navbar = (props) => {
           <button className='me-4 Navbar-btn' onClick={displayCart}>
             <BsCart3 />
           </button>
-          <h2 className='Navbar-count'> {len} </h2>
+          <h2 className='Navbar-count'> {cart.length} </h2>
           <img className='img-responsive' src={profilePic} alt="" />
         </div>
       </div>
@@ -37,6 +37,7 @@ const Navbar = (props) => {
     <div className="container Cart-layout">
     <Cart 
     cart = {cart}
+    setCart = {setCart}
     setShowCart = {setShowCart}
     />
     </div>

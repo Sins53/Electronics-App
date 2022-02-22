@@ -8,7 +8,7 @@ const Ecom = () => {
     <>
     <Navbar 
     cart = {cart}
-    len = {cart.length}
+    setCart = {setCart}
     />
     <Body 
     cart = {cart}

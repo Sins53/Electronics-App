@@ -7,7 +7,7 @@ var total = 0;
 const Cart = (props) => {
   //const [amount, setAmount] = useState(0)
   //const [totalProducts, setTotalProducts] = useState(0)
-  const {cart, setShowCart} = props
+  const {cart,setCart, setShowCart} = props
 
   var imgUrl = 'https://electronic-ecommerce.herokuapp.com/'
 
@@ -24,6 +24,15 @@ const Cart = (props) => {
 
   function closeCart(){
     setShowCart(false)
+  }
+
+  function removeCart(id) {
+    //alert(id)
+    var newArr = cart.filter(function(cart) {
+      return cart.id !== id;
+    });
+    console.log(newArr)
+    setCart(newArr)
   }
   
 
@@ -56,6 +65,9 @@ const Cart = (props) => {
           return (
             <>
             <div className="row mt-1">
+            <div className="col-auto">
+             <button onClick={() => removeCart(item.id)}> <AiFillCloseCircle /></button> 
+             </div>
             <div className="col-auto cimg">
         <img className='Cart-img' src={imgUrl + item.image} alt="" />
         </div>
