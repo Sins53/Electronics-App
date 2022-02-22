@@ -34,13 +34,11 @@ const Navbar = (props) => {
     </div>
     {showCart === true ? 
     <> 
-    <div className="container Cart-layout">
     <Cart 
     cart = {cart}
     setCart = {setCart}
     setShowCart = {setShowCart}
     />
-    </div>
     </> : null}
   </>
   )

@@ -20,12 +20,12 @@ const Body = (props) => {
     fetchItemList();
   }, []);//
 
-  console.log('here')
-  console.log(cart)
+  //console.log('here')
+  //console.log(cart)
 
   return (
     <>
-    <div className="Body-container">
+    <div className="container mt-3">
       <BodyTitle />
       <BodyList 
       item={item} 

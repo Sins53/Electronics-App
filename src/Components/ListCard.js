@@ -40,6 +40,7 @@ const ListCard = (props) => {
   stock < 5 ? stockName = 'danger' : stock < 10 ? stockName = 'ok' : stockName = 'full'  
     
   return (
+    <>
     <div className='ListCard' id={id}>
       <div className="ListCard-items">
         <div>
@@ -51,7 +52,7 @@ const ListCard = (props) => {
         />
         </div>
         <div>
-          <h4>{name}</h4>
+          <h3>{name}</h3>
         </div>
         <div>
           <div className="row justify-content-between">
@@ -67,6 +68,7 @@ const ListCard = (props) => {
         <div><button className='ListCard-btn' onClick={updateCart}>Add to Cart</button></div>
       </div>
     </div>
+    </>
   )
 }
 
