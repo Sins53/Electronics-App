@@ -50,6 +50,7 @@ const Cart = (props) => {
       </div>
       
         {cart.map((item) => {
+          {cart.indexOf(item)===0 ? qwe = 0 : console.log('false')}
           {productCount(item.order)}
           {totalAmount(item.r,item.order)}
           return (

@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './style.scss';
 import App from './App';
 //import Adder from './Components/Adder'
+//import Modal from './Components/Extra/Modal'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App /> 
+     { /* <Modal /> */}
+     <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

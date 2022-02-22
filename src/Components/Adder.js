@@ -22,7 +22,9 @@ const Adder = (props) => {
       order : cartOrder
     }
     setFormData(a) 
-    }  
+    } else {
+      setFormData(initialValues)
+    }
     
   }, [cartOrder])
 
