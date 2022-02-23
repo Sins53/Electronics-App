@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Validation from "./Error";
@@ -7,83 +7,51 @@ import {GrSubtractCircle , GrAddCircle} from 'react-icons/gr'
 const initialValues = {
   order : 1,
 }
-var check = 0;
 
 const Adder = (props) => {
   const [formData, setFormData] = useState(initialValues)
-  const {stock , setOrder , cartOrder, cart, id, setCart} = props;
+  const [disable, setDisable] = React.useState(false);
+  const {stock , setOrder} = props;
 
   const validationSchema = Yup.object({
-    phone: Yup.number().min(1, 'Lowest 1').max({stock}, 'Select Less').required(),                     
+    phone: Yup.string().min(1, 'Lowest 1').max({stock}, 'Must be below 10').required(),                     
   });
-
-  useEffect(() => {
-    if(cartOrder > 1) {
-    var a = {
-      order : cartOrder
-    }
-    check = 1;
-    setFormData(a) 
-    } else {
-      setFormData(initialValues)
-      check = 0;
-    } 
-  }, [cartOrder])
-
+  
 
   const OrderSub = () => {
-    setFormData({order: formData.order - 1})
-    //console.log(formData)
-    //console.log(stock)
-    if(check===0){
-      setOrder(formData.order - 1)
-    } else {
-      const newarr = cart.map((item) => {
-        if (item.id===id) {
-          console.log(item)
-          return {...item, order :  formData.order - 1}
-        
-        } else {
-          return item
-        }
-      })
-      setCart(newarr)
-    } 
+    formData.order >= 2 ? setFormData({order: formData.order - 1}): setDisable(true);
+    //setFormData({order: formData.order - 1})
+    formData.order > 1 ? setOrder(formData.order - 1) : setOrder(1)
+    setOrder(formData.order - 1)
   }
   const OrderAdd = () => {
-    setFormData({order: formData.order + 1})
-    console.log(formData)
-    if(check===0){
-      setOrder(formData.order + 1)
-    } else {
-      const newarr = cart.map((item) => {
-        if (item.id===id) {
-          console.log(item)
-          return {...item, order :  formData.order + 1}
-        } else {
-          return item
-        }
-      })
-      setCart(newarr)
-    } 
+    formData.order >= stock ? setDisable(true) : setFormData({order: formData.order + 1});
+    //setFormData({order: formData.order + 1});
+    formData.order === stock ? setOrder(stock) : setOrder(formData.order + 1)
+  }
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    var a = Number(e.target.value)
+    setFormData({order: a})
+    setOrder(a)
   }
 
-  const { values, errors, handleChange} =
+  const { values, errors} =
     useFormik({
       enableReinitialize: true,
       initialValues : formData,
       validationSchema,
     });
 
-
+   
   return (
     <>
       <div className="AdderCart">
           <button onClick={OrderSub}>
           <GrSubtractCircle />
           </button>
-        <form className='col-auto AdderCart-form' onSubmit={(e) => e.preventDefault() }>   
-      <input 
+        <form className='col-auto AdderCart-form' onSubmit={(e) => e.preventDefault() }>
+      <input  
         type="number" 
         name='order'
         value={values.order}

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import Adder from './Adder'
 import {AiFillCloseCircle} from 'react-icons/ai'
+import Adder2 from './Adder2';
 
 var qwe = 0;
 var total = 0;
@@ -56,7 +56,7 @@ const Cart = (props) => {
   return (
     <>
     {cart.map((item) => {
-      {item.stock < 5 ? stockName = 'danger' : item.stock < 10 ? stockName = 'ok' : stockName = 'full'}
+      {item.order <= 0 ? removeCart(item.id) : item.stock < 5 ? stockName = 'danger' : item.stock < 10 ? stockName = 'ok' : stockName = 'full'}
       return (
         <>
         <div className="row mt-1">
@@ -72,13 +72,15 @@ const Cart = (props) => {
         </div>
         <div className="col-4 ml-auto text-end">
           <h5 className={`ListCard-${stockName}`}>{ 'Stock remaining: ' + item.stock}</h5>
-          <Adder
+          <Adder2
           cartOrder = {item.order}
           cart = {cart}
           id = {item.id}
           setCart = {setCart}
+          stock = {item.stock}
           />
           <h5>Unit Price: {item.toRs}</h5>
+          {/* <h5>ordered : {item.order}</h5> */}
         </div>
         </div>
         </>
