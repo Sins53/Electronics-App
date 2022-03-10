@@ -5,6 +5,9 @@ import axios from "axios";
 
 const Body = (props) => {
   const [item, setItem] = useState([]);
+  const [filterData, setFilterData] = useState({min: 1,
+    max: 1000000000,
+    category: 0,})
 
   const {cart, setCart} = props
 
@@ -26,11 +29,15 @@ const Body = (props) => {
   return (
     <>
     <div className="container mt-3">
-      <BodyTitle />
+      <BodyTitle 
+      item ={item}
+      setFilterData = {setFilterData}
+      />
       <BodyList 
       item={item} 
       cart = {cart}
       setCart = {setCart}
+      filterData = {filterData}
       />
     </div>
 
